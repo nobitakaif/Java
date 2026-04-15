@@ -48,7 +48,24 @@ public class Train {
         return this.stationTimes;
     }
 
-    
-    
+    public void setTrainNo(String newTrainNo){
+        this.trainNo = newTrainNo;
+    }
+
+    public void setTrainId (String newTrainId){
+        this.trainId = newTrainId;
+    }
+
+    public void setStationTimes(Map<String,String> newStationTimes){
+        this.stationTimes = newStationTimes;
+    }
+
+    public void setStation (List<String> newStation){
+        this.stations = newStation;
+    }
+
+    public String getTrainInfo(){
+        return String.format("Train Id : %s Train No : %s", this.trainId, this.trainNo);
+    }
 }
 

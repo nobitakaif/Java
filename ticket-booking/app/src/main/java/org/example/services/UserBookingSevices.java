@@ -1,11 +1,11 @@
 package org.example.services;
 
-
 import org.example.entities.User;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.example.Utils.UserServiceUtils;
 import org.example.entities.Train;
 
 import java.io.File;
@@ -33,8 +33,9 @@ public class UserBookingSevices {
 
     public Boolean loginUser(){
         Optional<User> foundUser = userList.stream().filter(u -> {
-            return u.getName().equals(u.getName());
-        })
+            return u.getName().equals(user.getName()) && UserServiceUtils.checkPassword(user.getPassword(), u.getHashedPassword());
+        }).findFirst();
+        return foundUser.isPresent();
     }
     
 }

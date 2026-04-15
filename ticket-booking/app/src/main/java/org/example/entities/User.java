@@ -36,7 +36,7 @@ public class User{
 
     public void printTicket(){
         for(int i =0;i<this.tickedBooked.size();i++){
-            System.out.println(tickedBooked.get(i));
+            System.out.println(tickedBooked.get(i).getTicketInfo());
         }
     }
 
