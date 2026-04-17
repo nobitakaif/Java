@@ -6,14 +6,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.example.Utils.UserServiceUtils;
-import org.example.entities.Train;
+
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.*;
+
 
 public class UserBookingSevices {
 
@@ -27,15 +27,45 @@ public class UserBookingSevices {
     
     public UserBookingSevices(User newUser) throws IOException{
         this.user = newUser;
-        File filePath = new File(USER_PATH);
-        userList = objectMapper.readValue(filePath, new TypeReference<List<User>>() {});
+        loadUser();
     }   
 
+    public UserBookingSevices()throws IOException{
+        loadUser();
+    }
+
+    public List<User> loadUser ()throws IOException{
+        File filePath = new File(USER_PATH);
+        return userList = objectMapper.readValue(filePath, new TypeReference<List<User>>() { });
+    }
+    
     public Boolean loginUser(){
         Optional<User> foundUser = userList.stream().filter(u -> {
             return u.getName().equals(user.getName()) && UserServiceUtils.checkPassword(user.getPassword(), u.getHashedPassword());
         }).findFirst();
         return foundUser.isPresent();
     }
+
+    public Boolean signUp(User u){
+        try{
+            userList.add(u);
+            saveUserListToFile();
+            return Boolean.TRUE;
+        }catch(Exception e){
+            return Boolean.FALSE;
+        }
+    }
+
+    private void saveUserListToFile()throws IOException{
+        File userFile = new File(USER_PATH);
+        objectMapper.writeValue(userFile, userList);
+    }
+
+    public void fetchBooking(){
+        user.printTicket();
+    }
+
+
+    
     
 }

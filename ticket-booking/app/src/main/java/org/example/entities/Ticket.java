@@ -62,6 +62,12 @@ public class Ticket{
         this.dateofTravel = newDateOfTravel;
     }
     
+    // @Override
+    // public String toString() {
+    //     return "Ticket [ticketId=" + ticketId + ", userId=" + userId + ", source=" + source + ", destination="
+    //             + destination + ", dateofTravel=" + dateofTravel + ", train=" + train + "]";
+    // }
+
     public String getDateOfTravel(){
         return this.dateofTravel;
     }
